@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"ctfrancia/yourticket/internal/repository"
 	"flag"
 	"fmt"
 	"log"
@@ -18,6 +19,7 @@ type config struct {
 type application struct {
 	config config
 	logger *log.Logger
+	repo   *repository.Repository
 }
 
 func main() {
@@ -25,13 +27,15 @@ func main() {
 	idleConnsClosed := make(chan struct{})
 
 	flag.IntVar(&cfg.port, "port", 4000, "API server port")
-	flag.StringVar(&cfg.env, "env", "development", "Environemtn(development|staging|production)")
+	flag.StringVar(&cfg.env, "env", "development", "Environment(development|staging|production)")
 	flag.Parse()
 
 	logger := log.New(os.Stdout, "", log.Ldate|log.Ltime)
+	repo := repository.New()
 	app := &application{
 		config: cfg,
 		logger: logger,
+		repo:   repo,
 	}
 
 	srv := &http.Server{

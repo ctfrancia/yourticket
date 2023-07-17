@@ -7,23 +7,25 @@ import (
 )
 
 func (app *application) createFlightHandler(w http.ResponseWriter, r *http.Request) {
-	var input dto.CreateFlightRequest
-	err := app.readJSON(w, r, &input)
+	var cfr dto.CreateFlightRequest
+	err := app.readJSON(w, r, &cfr)
 	if err != nil {
 		app.badRequestResponse(w, r, err)
 		return
 	}
-	fmt.Println(input)
-	// TODO: validate input
-	// err = app.models.Flights.Insert(input)
-	// if err != nil {
-	// 	app.serverErrorResponse(w, r, err)
-	// 	return
-	// }
+
+	fmt.Println(cfr)
+	err = app.repo.CreateFlight(cfr)
+	if err != nil {
+		app.serverErrorResponse(w, r, err)
+		return
+	}
 }
 
+// The following functions are not implemented yet
+// this is on purpose to show some other APIs that are created
+// for the various ways that we can create and think about future
+// APIs
 func (app *application) createAirport() {}
-
 func (app *application) createAirline() {}
-
-func (app *application) createCity() {}
+func (app *application) createCity()    {}

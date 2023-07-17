@@ -1,5 +1,6 @@
 package config
 
+// ServerConfig is a struct that holds the server configuration
 type ServerConfig struct {
 	Addr  string
 	Dsn   string
