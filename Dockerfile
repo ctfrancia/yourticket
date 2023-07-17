@@ -6,8 +6,8 @@ RUN apk update && apk add --no-cache git
 WORKDIR $GOPATH/src/github.com/ctfrancia/yourticket
 COPY . .
 # Fetch dependencies.
-# Using go get.
 RUN go mod download
+
 # Build the binary.
 RUN go build -o /go/bin/yourticket ./cmd/api
 
