@@ -9,6 +9,8 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
+
+	"github.com/pkg/errors"
 )
 
 type repository interface {
@@ -44,7 +46,7 @@ func (r *Repository) CreateFlight(f dto.CreateFlightRequest) (model.CreateFlight
 	url := fmt.Sprintf("%s/%s/%s/create", r.flightsBaseUrl, v1, tenent)
 	resp, err := http.Post(url, "application/json", responseBody)
 	if err != nil {
-		return model.CreateFlightResponse{}, err
+		return model.CreateFlightResponse{}, errors.Wrapf(err, "error received from API call to to create flight: %s", f.FlightNumber)
 	}
 	defer resp.Body.Close()
 

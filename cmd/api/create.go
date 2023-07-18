@@ -14,9 +14,12 @@ func (app *application) createFlightHandler(w http.ResponseWriter, r *http.Reque
 		return
 	}
 
-	fmt.Println(cfr)
 	resp, err := app.repo.CreateFlight(cfr)
 	if err != nil {
+		// co
+		log := fmt.Sprintf("error within repo: %s \n, %s", cfr.FlightNumber, err.Error())
+		app.logger.Println(log)
+		// resp := app.logger.(err).Errorf("unable to serve HTTP POST request for flight %s", cfr.FlightNumber)
 		app.serverErrorResponse(w, r, err)
 		return
 	}
