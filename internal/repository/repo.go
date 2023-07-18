@@ -33,7 +33,6 @@ func New() *Repository {
 }
 
 // CreateFlight calls a 3rd party url to create a new flight at 3rd party or db or whatever
-//
 func (r *Repository) CreateFlight(f dto.CreateFlightRequest) (model.CreateFlightResponse, error) {
 	var response model.CreateFlightResponse
 	postBody, err := json.Marshal(f)

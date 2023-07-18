@@ -1,5 +1,7 @@
 package config
 
+// This file is where all configurations would be held
+
 // ServerConfig is a struct that holds the server configuration
 type ServerConfig struct {
 	Addr  string
