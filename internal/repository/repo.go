@@ -28,7 +28,7 @@ type Repository struct {
 // New creates a new repository instance
 func New() *Repository {
 	return &Repository{
-		flightsBaseUrl: "http://example-of-3rd-party-url.com/api",
+		flightsBaseUrl: "https://34e7a5ef-5e16-4dd8-88ad-d2f49ddc33be.mock.pstmn.io",
 	}
 }
 
@@ -56,6 +56,6 @@ func (r *Repository) CreateFlight(f dto.CreateFlightRequest) (model.CreateFlight
 
 	err = json.Unmarshal(body, &response)
 	return model.CreateFlightResponse{
-		FlightNumber: response.FlightNumber,
+		FlightNumber: f.FlightNumber,
 	}, nil
 }
